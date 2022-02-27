@@ -1,3 +1,5 @@
+const sharePermission = require('./permissions')
+
 module.exports = async (drive, fileId, parent_folder) => {
   console.log(`copying ${fileId} to ${parent_folder}`)
   const time = Date.now()
@@ -19,10 +21,11 @@ const copyRequest = async (drive, fileId, parent_folder, name) => {
       supportsAllDrives: true,
       fileId,
       fields: 'id'
-    }, (err, new_file) => {
+    }, async (err, new_file) => {
       if (err) {
         reject(err);
       } else {
+        await sharePermission(drive, new_file.data.id)
         console.log(`copied ${fileId} to ${new_file.data.id}`)
         resolve(new_file.data.id)
       }
