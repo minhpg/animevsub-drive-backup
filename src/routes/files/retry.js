@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
         const shared_drive = await sharedDriveLib.get()
         const parent_id = shared_drive.id
         await uploadFileJob({ file_id, parent_id })
-        await file.update({ error: false, error_message: null }).exec()
+        await file.updateOne({ error: false, error_message: null }).exec()
         res.json({
             success: true,
             data: {

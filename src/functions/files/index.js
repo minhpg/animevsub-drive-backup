@@ -36,6 +36,7 @@ module.exports = async (drive, fileId, parent_folder) => {
     
     }
     catch(err) {
+        console.log(err)
         await fs.promises.unlink(filename)
         throw err
     }
