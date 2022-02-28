@@ -8,7 +8,6 @@ const fileSchema = new mongoose.Schema({
     },
     dest: {
         type: String,
-        required: true
     },
     backup: {
         type: String,

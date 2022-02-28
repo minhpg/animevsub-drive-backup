@@ -2,7 +2,7 @@
 // const userAuth = require("./src/google-drive-api/userAuth");
 
 const copy = require("./src/google-drive-api/copy");
-const MD5 = require("./src/google-drive-api/MD5");
+const MD5 = require("./src/google-drive-api/metadata");
 
 const serviceAccountAuth = require("./src/google-drive-api/serviceAccountAuth");
 
@@ -14,7 +14,7 @@ const serviceAccountAuth = require("./src/google-drive-api/serviceAccountAuth");
 
 (async ( ) => {
     const auth = await serviceAccountAuth()
-    const drive_id = '1Kpai3G9w8-sGNHgwZJGYMmF9HJYtt7km'
+    const drive_id = '1dmUEYF32sylwHh3GRd9GLEqjFvJkpZag'
     console.log(drive_id)
     await MD5(auth, drive_id)
 })()
