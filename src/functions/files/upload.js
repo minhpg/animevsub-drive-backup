@@ -1,7 +1,5 @@
 const sharePermission = require('../../google-drive-api/permissions')
 const fs = require('fs')
-const changeChecksum = require('./changeChecksum')
-
 
 const upload = async (drive, fileId, parent_folder, file, name) => {
     return new Promise((resolve, reject) => {
