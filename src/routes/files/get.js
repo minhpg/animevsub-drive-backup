@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
             success: true,
             data: {
                 id: file_id,
+                md5: file.md5,
                 backups: file.backups,
                 parent: file.parent,
                 live: file.live,

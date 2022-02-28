@@ -15,9 +15,9 @@ module.exports = async (req, res) => {
                 current_page: page,
                 page_count,
                 file_count,
-                files: list_files.map(({id, backups, parent, live, error, error_message, createdAt, updatedAt} )=> {
+                files: list_files.map(({id, md5, backups, parent, live, error, error_message, createdAt, updatedAt} )=> {
                     return {
-                        id, backups, parent, live, error, error_message, created_at: createdAt, updated_at: updatedAt
+                        id, md5, backups, parent, live, error, error_message, created_at: createdAt, updated_at: updatedAt
                     }
                 })
             }
