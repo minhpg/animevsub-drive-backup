@@ -8,7 +8,13 @@ module.exports = async (req, res) => {
         if (!file) throw new Error('file does not exist!')
         const shared_drive = await sharedDriveLib.get()
         const parent_id = shared_drive.id
-        await uploadFileJob({ file_id, parent_id })
+        let origin_id = file_id
+        if (file.backups) {
+            for (backup of file.backups) {
+                if (backup.type == 'txt') origin_id = backup.id
+            }
+        }
+        await uploadFileJob({ origin_id, parent_id })
         await file.updateOne({ error: false, error_message: null }).exec()
         res.json({
             success: true,

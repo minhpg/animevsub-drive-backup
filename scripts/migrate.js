@@ -29,13 +29,32 @@ connection.connect();
 initConnection(() => {
     connection.query('SELECT * FROM DriveFiles', async (error, results) => {
         if (error) throw error;
+        console.log(results)
         for (result of results) {
             try {
-                const new_file = new fileSchema({
-                    origin: result.file.split('.')[1],
-                    dest: result.driveId
-                })
-                await new_file.save()
+                const origin_id = result.file.split('.')[1]
+                const file = await fileSchema.findOne({ id: origin_id }).exec()
+                if(!file){
+                    const new_file = new fileSchema({
+                        id: origin_id,
+                        backups: [
+                            {
+                                id: result.driveId,
+                                type: result.type == 'video' ? 'mp4' : 'txt'
+                            }
+                        ]
+                    })
+                    await new_file.save()
+                }
+                else {
+                    file.backups.push(
+                        {
+                            id: result.driveId,
+                            type: result.type == 'video' ? 'mp4' : 'txt'
+                        }
+                    )
+                    await file.save()
+                }
             }
             catch(err) {
                 console.log(err.message)
