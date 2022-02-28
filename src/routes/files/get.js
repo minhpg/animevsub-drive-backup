@@ -11,7 +11,8 @@ module.exports = async (req, res) => {
                 origin: file_id,
                 dest: file.dest,
                 backup: file.backup,
-                parent: file.parent
+                parent: file.parent,
+                created_at: file._id.getTimestamp()
             }
         })
     }
