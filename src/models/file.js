@@ -26,6 +26,9 @@ const fileSchema = new mongoose.Schema({
     error_message: {
         type: String
     }
-});
+},
+    {
+        timestamps: true
+    });
 
 module.exports = mongoose.model('file', fileSchema)

@@ -12,6 +12,9 @@ module.exports = async (req, res) => {
                 dest: file.dest,
                 backup: file.backup,
                 parent: file.parent,
+                live: file.live,
+                error: file.error,
+                error_message: file.error_message,
                 created_at: file._id.getTimestamp()
             }
         })
