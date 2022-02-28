@@ -17,11 +17,12 @@ uploadQueue.on('ready', () => {
         try {
             const { file_id, parent_id } = job.data
             const auth = await serviceAccountAuth()
-            const backups = await fileProcess(auth, file_id, parent_id)
+            const { original_md5, backups} = await fileProcess(auth, file_id, parent_id)
             await fileSchema.updateOne({
                 id: file_id
             }, {
-                backups: backups
+                backups: backups,
+                md5: original_md5
             }).exec()
         }
         catch (err) {

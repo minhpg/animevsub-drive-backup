@@ -6,7 +6,5 @@ module.exports = async (file) => {
     hashSum.update(fileBuffer);
 
     const hex = hashSum.digest('hex');
-
-    console.log(hex);
     return hex
 }

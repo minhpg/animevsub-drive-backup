@@ -6,10 +6,14 @@ const fileSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    md5: String,
     backups: [{
         id: {
             type: String,
             required: true
+        },
+        md5: {
+            type: String
         },
         type: {
             type: String,
