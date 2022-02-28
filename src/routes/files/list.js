@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
                 file_count,
                 files: list_files.map(({id, backups, parent, live, error, error_message, createdAt, updatedAt} )=> {
                     return {
-                        id, dest, backup, parent, live, error, error_message, created_at: createdAt, updated_at: updatedAt
+                        id, backups, parent, live, error, error_message, created_at: createdAt, updated_at: updatedAt
                     }
                 })
             }
