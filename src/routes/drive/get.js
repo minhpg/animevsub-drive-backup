@@ -9,7 +9,9 @@ module.exports = async (req, res) => {
             data: {
                 id: shared_drive_id,
                 file_count: shared_drive.file_count,
-                disabled: shared_drive.disabled
+                disabled: shared_drive.disabled,
+                error: shared_drive.error,
+                error_message: shared_drive.error_message
             }
         })
     }

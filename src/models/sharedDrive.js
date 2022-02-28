@@ -13,6 +13,14 @@ const sharedDriveSchema = new mongoose.Schema({
     disabled: {
         type: Boolean,
         default: false
+    },
+    error: {
+        type: Boolean,
+        default: false,
+    }, 
+    error_message: {
+        type: String,
     }
+
 });
 module.exports = mongoose.model('shared-drives', sharedDriveSchema)

@@ -6,7 +6,8 @@ const createServiceAccountJob = require('../../queues/sharedDrive')
 const get = async () => {
     const drive = await sharedDriveSchema.findOne({
         count: { $lt: process.env.SHAREDDRIVE_FILE_LIMIT || 300000 },
-        disabled: false
+        disabled: false,
+        error: false
     }).exec()
     if (!drive) throw new Error('no shared drive available!')
     return drive
