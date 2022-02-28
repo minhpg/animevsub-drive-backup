@@ -1,17 +1,22 @@
 const mongoose = require('mongoose');
 
 const fileSchema = new mongoose.Schema({
-    origin: {
+    id: {
         type: String,
         required: true,
         unique: true
     },
-    dest: {
-        type: String,
-    },
-    backup: {
-        type: String,
-    },
+    backups: [{
+        id: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            enum: ['txt', 'mp4'],
+            required: true
+        }
+    }],
     parent: {
         type: String,
     },

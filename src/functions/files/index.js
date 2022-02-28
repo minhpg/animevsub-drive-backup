@@ -5,7 +5,7 @@ const uuid = require('uuid')
 const fs = require('fs')
 module.exports = async (drive, fileId, parent_folder) => {
     const filename = uuid.v4()
-
+    const backups = []
     try {
         console.log(`copying ${fileId} to ${parent_folder}`)
         const time = Date.now()
@@ -14,17 +14,26 @@ module.exports = async (drive, fileId, parent_folder) => {
 
         const name = `${fileId}-${time}`
         
-        await changeChecksum(file)
-        const copyMP4 = await upload(drive, fileId, parent_folder, file, name + '.mp4')
+        const copies = process.env.COPIES || 1
+        for(copy of Array(parseInt(copies).toKeys())) {
+            await changeChecksum(file)
+            const copyMP4 = await upload(drive, fileId, parent_folder, file, name + '.mp4')
+            backups.push({
+                id: copyMP4,
+                type: 'mp4'
+            })
+        }
     
         await changeChecksum(file)
         const copyTxt = await upload(drive, fileId, parent_folder, file, name + '.txt')
+        backups.push({
+            id: copyTxt,
+            type: 'mp4'
+        })
     
         await fs.promises.unlink(filename)
-        return {
-            mp4: copyMP4,
-            txt: copyTxt
-        }
+         
+        return backups
     
     }
     catch(err) {

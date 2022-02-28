@@ -4,12 +4,12 @@ const uploadFileJob = require('../../queues/files')
 module.exports = async (req, res) => {
     try {
         const file_id = req.params.file_id
-        const file = await fileSchema.findOne({ origin: file_id }).exec()
+        const file = await fileSchema.findOne({ id: file_id }).exec()
         if (file) throw new Error('file exist!')
         const shared_drive = await sharedDriveLib.get()
         const parent_id = shared_drive.id
         const new_file = new fileSchema({
-            origin: file_id,
+            id: file_id,
             parent: parent_id
         })
         await new_file.save()
@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
         res.json({
             success: true,
             data: {
-                origin: file_id,
+                id: file_id,
                 parent: parent_id
             }
         })
