@@ -21,13 +21,13 @@ const serviceAccountAuth = require("./src/google-drive-api/serviceAccountAuth");
     await MD5(auth, drive_id)
 
     console.log('mp4:')
-    const drive_id_2 = '1IAvWK04W1Y0GTfKT401YwSCy1qsTNGQO'
+    const drive_id_2 = '1twAkxRxYyDRZlmAO9Rfe8g594JN11rZX'
     console.log(drive_id_2)
     await MD5(auth, drive_id_2)
 
 
     console.log('txt:')
-    const drive_id_3 = '1CtW-lZ_Vca253zeukt6l1wkyxUokHSJf'
+    const drive_id_3 = '1um5LxHezSfP1izNqcgAplcNzZqTPVHP-'
     console.log(drive_id_3)
     await MD5(auth, drive_id_3)
 
