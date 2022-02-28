@@ -38,7 +38,7 @@ const assignServiceAccountSharedDrive = async (drive, parent_id) => {
                 supportsAllDrives: true,
             }, (err, success) => {
                 if (err) {
-                    console.log(err)
+                    throw err
                 }
                 else {
                     console.log(`added ${permission.emailAddress} to shared drive ${parent_id}`)
