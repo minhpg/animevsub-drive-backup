@@ -18,10 +18,10 @@ const initConnection = (callback) => {
   };
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'admin',
-    password: '04082004',
-    database: 'drive'
+    host: '116.203.37.200',
+    user: 'backup',
+    password: 'backup',
+    database: 'drivebk'
 });
 
 connection.connect();
@@ -32,6 +32,7 @@ initConnection(() => {
         console.log(results)
         for (result of results) {
             try {
+                console.log(result.file)
                 const origin_id = result.file.split('.')[1]
                 const file = await fileSchema.findOne({ id: origin_id }).exec()
                 if(!file){
