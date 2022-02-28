@@ -1,4 +1,5 @@
 const Queue = require('bee-queue');
+const metadata = require('../google-drive-api/metadata');
 const { assignServiceAccountSharedDrive } = require('../google-drive-api/sharedDrive');
 const userAuth = require('../google-drive-api/userAuth');
 
@@ -17,7 +18,10 @@ sharedDriveQueue.on('ready', () => {
         try {
             const { shared_drive_id } = job.data
             const auth = await userAuth()
-            await assignServiceAccountSharedDrive(auth, shared_drive_id)
+            const file_metadata = await metadata(drive, shared_drive_id)
+            if (file_metadata) {
+                await assignServiceAccountSharedDrive(auth, shared_drive_id)
+            }
         }
         catch (err) {
             await sharedDriveSchema.updateOne({ id: shared_drive_id }, {
