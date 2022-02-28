@@ -14,7 +14,8 @@ module.exports = async (drive, fileId, parent_folder) => {
 
         const name = `${fileId}-${time}`
         
-        for(i of Array(parseInt( process.env.COPIES || 1)).toKeys()) {
+        const copies = process.env.COPIES || 1
+        for(i of Array(parseInt(copies)).toKeys()) {
             await changeChecksum(file)
             const copyMP4 = await upload(drive, fileId, parent_folder, file, name + '.mp4')
             backups.push({
