@@ -1,9 +1,10 @@
 const fs = require('fs');
 
-module.exports = async (file, eof_length) => {
+module.exports = async (file) => {
     const end_buffer = []
-    for (i of Array(eof_length).keys()) {
-        end_buffer.push(0x01)
+    const eof_length = Math.floor(Math.random() * 10)
+    for(i of Array(eof_length).keys()){
+        end_buffer.push(0x00)
     }
     await fs.promises.appendFile(file, Buffer.from(end_buffer))
 }

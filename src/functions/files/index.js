@@ -11,12 +11,14 @@ module.exports = async (drive, fileId, parent_folder) => {
         const time = Date.now()
     
         const file = await download(drive, fileId, filename)
+
+        const fileObj = await fs.promises.open(file)
         const name = `${fileId}-${time}`
         
-        await changeChecksum(file, 1)
+        await changeChecksum(fileObj, 1)
         const copyMP4 = upload(drive, fileId, parent_folder, file, name + '.mp4')
     
-        await changeChecksum(file, 3)
+        await changeChecksum(fileObj, 3)
         const copyTxt = upload(drive, fileId, parent_folder, file, name + '.txt')
     
         const responses = await Promise.all([copyMP4, copyTxt])
