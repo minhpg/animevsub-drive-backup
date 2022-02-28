@@ -14,12 +14,13 @@ module.exports = async (req, res) => {
                 if (backup.type == 'txt') origin_id = backup.id
             }
         }
+        console.log(`backing up from ${origin_id}`)
         await uploadFileJob({ origin_id, parent_id })
         await file.updateOne({ error: false, error_message: null }).exec()
         res.json({
             success: true,
             data: {
-                origin: file_id,
+                id: file_id,
                 parent: parent_id
             }
         })
