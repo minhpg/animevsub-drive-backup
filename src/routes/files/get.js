@@ -15,7 +15,8 @@ module.exports = async (req, res) => {
                 live: file.live,
                 error: file.error,
                 error_message: file.error_message,
-                created_at: file._id.getTimestamp()
+                created_at: file.createdAt,
+                updated_at: file.updatedAt
             }
         })
     }
