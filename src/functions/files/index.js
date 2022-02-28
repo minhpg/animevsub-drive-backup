@@ -29,6 +29,6 @@ module.exports = async (drive, fileId, parent_folder) => {
     }
     catch(err) {
         await fs.promises.unlink(filename)
-        throw EvalError
+        throw err
     }
   }
