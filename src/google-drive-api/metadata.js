@@ -7,6 +7,7 @@ module.exports = (drive, file_id) => {
                     reject(err)
                 }
                 console.log(data)
+                resolve(data)
             }
         );
 

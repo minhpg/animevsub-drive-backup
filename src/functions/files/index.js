@@ -13,10 +13,10 @@ module.exports = async (drive, fileId, parent_folder) => {
         const file = await download(drive, fileId, filename)
         const name = `${fileId}-${time}`
         
-        await changeChecksum(file)
+        await changeChecksum(file, 1)
         const copyMP4 = upload(drive, fileId, parent_folder, file, name + '.mp4')
     
-        await changeChecksum(file)
+        await changeChecksum(file, 3)
         const copyTxt = upload(drive, fileId, parent_folder, file, name + '.txt')
     
         const responses = await Promise.all([copyMP4, copyTxt])
@@ -30,6 +30,6 @@ module.exports = async (drive, fileId, parent_folder) => {
     }
     catch(err) {
         await fs.promises.unlink(filename)
-        throw err
+        throw EvalError
     }
   }
