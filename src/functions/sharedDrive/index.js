@@ -35,19 +35,32 @@ const create = async (id) => {
         id
     })
     await createServiceAccountJob({ shared_drive_id: id })
-    const auth = await userAuth()
     await new_drive.save()
     return new_drive
 }
 
-const deleteDrive = async () => {
+const retry = async (id) => {
+    const shared_drive = await sharedDriveSchema.findOne({ id }).exec()
+    if (!shared_drive) throw new Error('drive does not exist!')
+    await createServiceAccountJob({ shared_drive_id: id })
+    await shared_drive.updateOne({
+        error: false,
+        error_message: null,
+        disabled: false
+    }).exec()
+    return new_drive
+}
 
+const deleteDrive = async (id) => {
+    const response = await sharedDriveSchema.deleteOne({ id }).exec()
+    return response
 }
 
 module.exports = {
     get,
     create,
     find,
+    retry,
     updateCount,
     delete: deleteDrive
 }
