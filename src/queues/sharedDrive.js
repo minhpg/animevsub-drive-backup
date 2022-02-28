@@ -27,7 +27,7 @@ sharedDriveQueue.on('ready', () => {
             await sharedDriveSchema.updateOne({ id: shared_drive_id }, {
                 error: true,
                 error_message: err.message
-            })
+            }).exec()
             return done()
         }
 
