@@ -7,4 +7,5 @@ module.exports = async (file) => {
         end_buffer.push(0x00)
     }
     await fs.promises.appendFile(file, Buffer.from(end_buffer))
+    return
 }
