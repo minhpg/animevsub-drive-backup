@@ -48,7 +48,7 @@ const retry = async (id) => {
         error_message: null,
         disabled: false
     }).exec()
-    return new_drive
+    return shared_drive
 }
 
 const deleteDrive = async (id) => {
