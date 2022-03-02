@@ -17,7 +17,9 @@ sharedDriveQueue.on('ready', () => {
     sharedDriveQueue.process(1, async (job, done) => {
         try {
             const { shared_drive_id } = job.data
+            console.log('adding service accounts to '+shared_drive_id)
             const auth = await userAuth()
+            console.log(auth)
             const file_metadata = await metadata(drive, shared_drive_id)
             if (file_metadata) {
                 await assignServiceAccountSharedDrive(auth, shared_drive_id)
