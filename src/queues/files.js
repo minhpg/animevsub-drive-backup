@@ -26,7 +26,7 @@ uploadQueue.on('ready', () => {
                 parent_id: parent_id,
                 md5: original_md5
             }).exec()
-            await updateCount(backups.length)
+            await updateCount(backups.length, parent_id)
         }
         catch (err) {
             await fileSchema.updateOne({
