@@ -21,6 +21,7 @@ sharedDriveQueue.on('ready', () => {
             const auth = await userAuth()
             console.log(auth)
             const file_metadata = await metadata(drive, shared_drive_id)
+            console.log(file_metadata)
             if (file_metadata) {
                 await assignServiceAccountSharedDrive(auth, shared_drive_id)
             }
