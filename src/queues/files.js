@@ -16,9 +16,9 @@ const uploadFileJob = (params) => {
 uploadQueue.on('ready', () => {
     uploadQueue.process(5, async (job, done) => {
         try {
-            const { file_id, parent_id } = job.data
+            const { file_id, parent_id, txt_id } = job.data
             const auth = await serviceAccountAuth()
-            const { original_md5, backups} = await fileProcess(auth, file_id, parent_id)
+            const { original_md5, backups} = await fileProcess(auth, txt_id || file_id, parent_id)
             await fileSchema.updateOne({
                 id: file_id
             }, {
