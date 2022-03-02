@@ -4,7 +4,7 @@ const uploadFileJob = require('../../queues/files')
 module.exports = async (req, res) => {
     try {
         let file_id = req.params.file_id
-        const file = await fileSchema.findOne({ origin: file_id }).exec()
+        const file = await fileSchema.findOne({ id: file_id }).exec()
         if (!file) throw new Error('file does not exist!')
         const shared_drive = await sharedDriveLib.get()
         const parent_id = shared_drive.id

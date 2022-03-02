@@ -22,6 +22,7 @@ uploadQueue.on('ready', () => {
                 id: file_id
             }, {
                 backups: backups,
+                parent_id: parent_id,
                 md5: original_md5
             }).exec()
         }
