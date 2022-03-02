@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
         if (!file) throw new Error('file does not exist!')
         const shared_drive = await sharedDriveLib.get()
         const parent_id = shared_drive.id
+        console.log(`retry backing up ${file_id} to ${parent_id}`)
         if (file.backups) {
             for (backup of file.backups) {
                 if (backup.type == 'txt') file_id = backup.id

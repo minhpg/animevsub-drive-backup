@@ -1,5 +1,6 @@
 const Queue = require('bee-queue');
 const fileProcess = require('../functions/files');
+const { updateCount } = require('../functions/sharedDrive');
 const serviceAccountAuth = require('../google-drive-api/serviceAccountAuth');
 const fileSchema = require('../models/file')
 const options = {
@@ -25,6 +26,7 @@ uploadQueue.on('ready', () => {
                 parent_id: parent_id,
                 md5: original_md5
             }).exec()
+            await updateCount(backups.length)
         }
         catch (err) {
             await fileSchema.updateOne({
