@@ -40,4 +40,15 @@ const fileSchema = new mongoose.Schema({
         timestamps: true
     });
 
+fileSchema.statics.random = async () => {
+    const count = await this.count();
+    const rand = Math.floor(Math.random() * count);
+    const randomDoc = await this.findOne({
+        count: { $lt: process.env.SHAREDDRIVE_FILE_LIMIT || 300000 },
+        disabled: false,
+        error: false
+    }).skip(rand);
+    return randomDoc;
+};
+
 module.exports = mongoose.model('file', fileSchema)
