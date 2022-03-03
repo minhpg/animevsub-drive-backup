@@ -5,7 +5,7 @@ const createServiceAccountJob = require('../../queues/sharedDrive')
 
 const get = async () => {
     const count = await sharedDriveSchema.count().exec()
-    const rand = Math.floor(Math.random() * count)
+    const rand = Math.floor(Math.random() * count) - 1
     console.log(`skipping ${rand} drives`)
     const drive = await sharedDriveSchema.findOne({
         count: { $lt: process.env.SHAREDDRIVE_FILE_LIMIT || 300000 },
