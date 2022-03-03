@@ -4,14 +4,15 @@ const sharedDriveSchema = require('../../models/sharedDrive')
 const createServiceAccountJob = require('../../queues/sharedDrive')
 
 const get = async () => {
-    // const count = await sharedDriveSchema.count().exec()
-    // const rand = Math.floor(Math.random() * count);
-    // const drive = await sharedDriveSchema.findOne({
-    //     count: { $lt: process.env.SHAREDDRIVE_FILE_LIMIT || 300000 },
-    //     disabled: false,
-    //     error: false
-    // }).skip(rand).exec()
-    const drive = await sharedDriveSchema.random()
+    const count = await sharedDriveSchema.count().exec()
+    const rand = Math.floor(Math.random() * count)
+    console.log(`skipping ${rand} drives`)
+    const drive = await sharedDriveSchema.findOne({
+        count: { $lt: process.env.SHAREDDRIVE_FILE_LIMIT || 300000 },
+        disabled: false,
+        error: false
+    }).skip(rand).exec()
+    console.log(drive)
     if (!drive) throw new Error('no shared drive available!')
     return drive
 }
